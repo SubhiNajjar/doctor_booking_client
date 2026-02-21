@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   Table,
   Button,
@@ -13,22 +13,29 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-} from 'reactstrap';
-import { fetchPatientAppointments, cancelAppointment } from '../../redux/appointmentSlice';
+} from "reactstrap";
+import {
+  fetchPatientAppointments,
+  cancelAppointment,
+} from "../../redux/appointmentSlice";
 
 const STATUS_COLOR = {
-  confirmed: 'success',
-  cancelled: 'secondary',
+  confirmed: "success",
+  cancelled: "secondary",
 };
 
 function ClientAppointmentsListPage() {
   const dispatch = useDispatch();
-  const { list: appointments, loading, error } = useSelector((state) => state.appointments);
+  const {
+    list: appointments,
+    loading,
+    error,
+  } = useSelector((state) => state.appointments);
 
   const [cancelModal, setCancelModal] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [cancelling, setCancelling] = useState(false);
-  const [successMsg, setSuccessMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState("");
 
   useEffect(() => {
     dispatch(fetchPatientAppointments());
@@ -45,11 +52,13 @@ function ClientAppointmentsListPage() {
     setCancelling(false);
     setCancelModal(false);
     setSelectedId(null);
-    setSuccessMsg('Appointment cancelled successfully.');
-    setTimeout(() => setSuccessMsg(''), 4000);
+    setSuccessMsg("Appointment cancelled successfully.");
+    setTimeout(() => setSuccessMsg(""), 4000);
   };
 
-  const sorted = [...appointments].sort((a, b) => new Date(b.date) - new Date(a.date));
+  const sorted = [...appointments].sort(
+    (a, b) => new Date(b.date) - new Date(a.date),
+  );
 
   return (
     <div>
@@ -58,12 +67,21 @@ function ClientAppointmentsListPage() {
           <h2 className="page-title">My Appointments</h2>
           <p className="text-muted">All your bookings in one place</p>
         </div>
-        <Button tag={Link} to="/client/book" color="primary" className="btn-primary-custom">
+        <Button
+          tag={Link}
+          to="/client/book"
+          color="primary"
+          className="btn-primary-custom"
+        >
           + Book New
         </Button>
       </div>
 
-      {successMsg && <Alert color="success" className="py-2">{successMsg}</Alert>}
+      {successMsg && (
+        <Alert color="success" className="py-2">
+          {successMsg}
+        </Alert>
+      )}
       {error && <Alert color="danger">{error}</Alert>}
 
       {loading ? (
@@ -75,7 +93,12 @@ function ClientAppointmentsListPage() {
           <CardBody className="text-center py-5">
             <div className="empty-icon mb-3">📋</div>
             <h6 className="text-muted">No appointments yet</h6>
-            <Button tag={Link} to="/client/book" color="primary" className="btn-primary-custom mt-3">
+            <Button
+              tag={Link}
+              to="/client/book"
+              color="primary"
+              className="btn-primary-custom mt-3"
+            >
               Book your first appointment
             </Button>
           </CardBody>
@@ -89,8 +112,8 @@ function ClientAppointmentsListPage() {
                   <tr>
                     <th>Doctor</th>
                     <th>Specialty</th>
-                    <th>Date</th>
-                    <th>Time</th>
+                    <th className="date-col">Date</th>
+                    <th className="time-col">Time</th>
                     <th>Duration</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -99,22 +122,34 @@ function ClientAppointmentsListPage() {
                 <tbody>
                   {sorted.map((appt) => (
                     <tr key={appt._id}>
-                      <td className="fw-semibold">Dr. {appt.doctorId?.name || '—'}</td>
-                      <td className="text-muted">{appt.doctorId?.specialty || '—'}</td>
-                      <td>
-                        {new Date(appt.date).toLocaleDateString('en-US', {
-                          weekday: 'short', month: 'short', day: 'numeric', year: 'numeric',
+                      <td className="fw-semibold">
+                        Dr. {appt.doctorId?.name || "—"}
+                      </td>
+                      <td className="text-muted">
+                        {appt.doctorId?.specialty || "—"}
+                      </td>
+                      <td className="date-col">
+                        {new Date(appt.date).toLocaleDateString("en-US", {
+                          weekday: "short",
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
                         })}
                       </td>
-                      <td>{appt.startTime} – {appt.endTime}</td>
+                      <td className="time-col">
+                        {appt.startTime} – {appt.endTime}
+                      </td>
                       <td>{appt.duration} min</td>
                       <td>
-                        <Badge color={STATUS_COLOR[appt.status] || 'secondary'} className="status-badge">
+                        <Badge
+                          color={STATUS_COLOR[appt.status] || "secondary"}
+                          className="status-badge"
+                        >
                           {appt.status}
                         </Badge>
                       </td>
                       <td>
-                        {appt.status !== 'cancelled' && (
+                        {appt.status !== "cancelled" && (
                           <Button
                             size="sm"
                             color="danger"
@@ -136,17 +171,24 @@ function ClientAppointmentsListPage() {
       )}
 
       <Modal isOpen={cancelModal} toggle={() => setCancelModal(false)} centered>
-        <ModalHeader toggle={() => setCancelModal(false)}>Cancel Appointment</ModalHeader>
+        <ModalHeader toggle={() => setCancelModal(false)}>
+          Cancel Appointment
+        </ModalHeader>
         <ModalBody>
-          Are you sure you want to cancel this appointment? This action cannot be undone.
+          Are you sure you want to cancel this appointment? This action cannot
+          be undone.
         </ModalBody>
         <ModalFooter>
-          <Button color="secondary" outline onClick={() => setCancelModal(false)}>
+          <Button
+            color="secondary"
+            outline
+            onClick={() => setCancelModal(false)}
+          >
             Keep it
           </Button>
           <Button color="danger" onClick={handleCancel} disabled={cancelling}>
             {cancelling ? <Spinner size="sm" className="me-1" /> : null}
-            {cancelling ? 'Cancelling…' : 'Yes, Cancel'}
+            {cancelling ? "Cancelling…" : "Yes, Cancel"}
           </Button>
         </ModalFooter>
       </Modal>
