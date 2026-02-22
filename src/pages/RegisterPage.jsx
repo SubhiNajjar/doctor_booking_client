@@ -57,7 +57,7 @@ function RegisterPage() {
           <Col xs={12} sm={10} md={7} lg={6}>
             <div className="text-center mb-4">
               <span className="brand-logo-large">&#x2665;</span>
-              <h1 className="auth-brand-name">MediBook</h1>
+              <h1 className="auth-brand-name">Smart Healthcare</h1>
               <p className="text-muted">Join our platform today</p>
             </div>
             <Card className="auth-card shadow-lg">

@@ -45,7 +45,7 @@ function LoginPage() {
           <Col xs={12} sm={10} md={6} lg={5}>
             <div className="text-center mb-4">
               <span className="brand-logo-large">&#x2665;</span>
-              <h1 className="auth-brand-name">MediBook</h1>
+              <h1 className="auth-brand-name">Smart Healthcare</h1>
               <p className="text-muted">Your trusted appointment platform</p>
             </div>
             <Card className="auth-card shadow-lg">

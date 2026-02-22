@@ -6,7 +6,7 @@ function Footer() {
     <footer className="app-footer">
       <div className="container text-center">
         <p className="mb-0">
-          &copy; {year} <strong>MediBook</strong> &mdash; Your trusted appointment platform
+          &copy; {year} <strong>Smart Healthcare</strong> &mdash; Your trusted appointment platform
         </p>
       </div>
     </footer>

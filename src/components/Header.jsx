@@ -44,7 +44,7 @@ function Header() {
     <Navbar className="app-navbar" expand="md" dark>
       <div className="container">
         <NavbarBrand tag={NavLink} to={user?.role === 'doctor' ? '/doctor/dashboard' : '/client/dashboard'}>
-          <span className="brand-icon">&#x2665;</span> MediBook
+          <span className="brand-icon">&#x2665;</span> Smart Healthcare
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
