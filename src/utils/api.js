@@ -5,7 +5,7 @@ const api = axios.create({
     "doctorbookingclient-production.up.railway.app",
   )
     ? "https://doctorbookingapi-production.up.railway.app/api"
-    : "http://localhost:5000/api", //''2,
+    : "http://localhost:5000/api",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
