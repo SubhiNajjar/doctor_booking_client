@@ -51,7 +51,7 @@ function Header() {
           {user && (
             <Nav className="me-auto" navbar>
               {links.map((link) => (
-                <NavItem key={link.to}>
+                <NavItem key={link.to} className='me-2'>
                   <NavLink
                     to={link.to}
                     className={({ isActive }) =>
