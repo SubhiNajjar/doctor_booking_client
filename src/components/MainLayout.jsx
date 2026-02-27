@@ -1,7 +1,8 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import Header from './Header';
-import Footer from './Footer';
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Header from "./Header";
+import Footer from "./Footer";
+import ChatBot from "./ChatBot";
 
 function MainLayout() {
   return (
@@ -13,6 +14,7 @@ function MainLayout() {
         </div>
       </main>
       <Footer />
+      <ChatBot />
     </div>
   );
 }
